@@ -15,6 +15,7 @@ We address **How to create a poster from a paper** and **How to evaluate poster.
 
 
 ## 🔥 Update
+- [x] [2025.10.18] Added **Docker** support.
 - [x] [2025.10.13] Added automatic **logo support** for conferences and institutions, **YAML-based style customization**, a new default theme.
 - [x] [2025.9.18] Paper2Poster has been accepted to **NeurIPS 2025 Dataset and Benchmark Track**.
 - [x] [2025.9.3]  We now support generate per section content in **parallel** for faster generation, by simply specifying `--max_workers`.
@@ -36,6 +37,7 @@ We address **How to create a poster from a paper** and **How to evaluate poster.
 
 <!--- [📚 Introduction](#-introduction)-->
 - [🛠️ Installation](#-installation)
+- [🐳 Docker Deployment](#-docker-deployment)
 - [🚀 Quick Start](#-quick-start)
 - [🔮 Evaluation](#-evaluation)
 ---
@@ -76,6 +78,40 @@ To use Google Custom Search for more reliable logo search, add these to your `.e
 GOOGLE_SEARCH_API_KEY=<your_google_search_api_key>
 GOOGLE_SEARCH_ENGINE_ID=<your_search_engine_id>
 ```
+
+---
+
+## 🐳 Docker Deployment
+
+For easier deployment, you can use Docker to run Paper2Poster without manual dependency installation.
+
+**Build the Docker image:**
+```bash
+docker build -t paper2poster .
+```
+
+**Troubleshooting:**
+- If you get a "permission denied" error when running Docker commands, use `sudo` before Docker commands (e.g., `sudo docker build -t paper2poster .`)
+
+**Example:**
+```bash
+# Create output directory if it doesn't exist
+mkdir -p <4o_4o>_generated_posters
+
+docker run --rm \
+-e OPENAI_API_KEY=<your_openai_api_key> \
+-v "$(pwd)/Paper2Poster-data:/Paper2Poster-data" \
+-v "$(pwd)/<4o_4o>_generated_posters:/app/<4o_4o>_generated_posters" \
+paper2poster \
+python -m PosterAgent.new_pipeline \
+--poster_path="/Paper2Poster-data/<paper_name>/paper.pdf" \
+--model_name_t=4o \
+--model_name_v=4o \
+--poster_width_inches=48 \
+--poster_height_inches=36
+```
+
+The generated poster will be saved in `<4o_4o>_generated_posters/Paper2Poster-data/paper_name/poster.pptx` on your host machine.
 
 ---
 

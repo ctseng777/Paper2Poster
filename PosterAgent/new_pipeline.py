@@ -428,7 +428,7 @@ if __name__ == '__main__':
 
     # Step 9: Move poster.pptx to the output directory
     pptx_path = os.path.join(output_dir, f'{poster_name}.pptx')
-    os.rename(f'{args.tmp_dir}/poster.pptx', pptx_path)
+    shutil.move(f'{args.tmp_dir}/poster.pptx', pptx_path)
     print(f'Poster PowerPoint saved to {pptx_path}')
     # Step 10: Convert the PowerPoint to images
     ppt_to_images(pptx_path, output_dir)
